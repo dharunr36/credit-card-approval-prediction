@@ -1,4 +1,0 @@
-flask
-fastapi
-uvicorn
-python-multipart
