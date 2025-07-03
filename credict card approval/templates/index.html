@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Credit Card Approval</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('https://images.unsplash.com/photo-1605902711622-cfb43c4437d3?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgb(42, 41, 41);
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 30px 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      transition: 0.3s ease;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 600;
+      color: #000000;
+    }
+
+    label {
+      font-size: 14px;
+      margin-top: 15px;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 5px;
+      border-radius: 10px;
+      
+      outline: none;
+      font-size: 15px;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      background: #00c9ff;
+      background: linear-gradient(to right, #00c9ff, #92fe9d);
+      border: none;
+      padding: 12px;
+      border-radius: 12px;
+      color: #000;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .approved {
+      color: #2ecc71;
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .not-approved {
+      color: #e74c3c;
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Credit Card Approval</h2>
+    <form method="post" action="/predict">
+      <label>Age:</label>
+      <input type="text" name="feature1" required>
+
+      <label>Employed:</label>
+      <select name="feature2" required>
+        <option value="0">No</option>
+        <option value="1" selected>Yes</option>
+      </select>
+
+      <label>Prior Default:</label>
+      <select name="feature3" required>
+        <option value="1" selected>No</option>
+        <option value="0">Yes</option>
+      </select>
+
+      <label>Credit Score:</label>
+      <input type="text" name="feature4" required>
+
+      <label>Monthly Income:</label>
+      <input type="text" name="feature5" required>
+
+      <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+      <div class="{{ 'approved' if prediction == 'Approved' else 'not-approved' }}">
+        Prediction: {{ prediction }}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
+
